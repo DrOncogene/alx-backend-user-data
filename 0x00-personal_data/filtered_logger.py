@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-filters and obfuscate 
-fields from a message
+filters and obfuscate fields from a message
 """
 import re
 from typing import List
 
 
 def filter_datum(fields: List[str], redaction: str,
-                  message: str, sep: str) -> str:
+                 message: str, sep: str) -> str:
     """
     uses regex to identify and
     redact specified fields from message
