@@ -4,6 +4,9 @@ the auth module
 """
 import base64
 import binascii
+from typing import TypeVar
+
+from models.user import User
 from .auth import Auth
 
 
@@ -45,3 +48,21 @@ class BasicAuth(Auth):
 
         username, password = auth_header.split(':')
         return username, password
+
+    def user_object_from_credentials(self, user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        """
+        authenticates the user
+        """
+        if not user_email or not isinstance(user_email, str):
+            return None
+        if not user_pwd or not isinstance(user_pwd, str):
+            return None
+
+        user = User.search({'email': user_email})
+        if len(user) == 0:
+            return None
+        if not user[0].is_valid_password(user_pwd):
+            return None
+
+        return user[0]
