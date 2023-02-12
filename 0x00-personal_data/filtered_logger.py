@@ -12,14 +12,6 @@ def filter_datum(fields: List[str], redaction: str,
     """
     uses regex to identify and
     redact specified fields from message
-    :param fields: list of fields to be redacted
-    :param redaction: string to replace the redacted
-                        field's value with
-    :param message: str that contain the fields and values
-    :param separator: separator char the delineate field-value pairs
-                in message
-
-    :return: message with fields in fields param redacted
     """
     for field in fields:
         # matches one or more char that is not the 'sep'
@@ -40,6 +32,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """constructor"""
         super().__init__(self.FORMAT)
         self.fields = fields
 
