@@ -23,7 +23,7 @@ def filter_datum(fields: List[str], redaction: str,
     for field in fields:
         # matches one or more char that is not the 'sep'
         # and preceded by 'field=' and followed by 'sep'
-        regex: str = f'(?<={field}=)([^{separator}]+)(?={separator})'
-        message: str = re.sub(regex, redaction, message)
+        regex = f'(?<={field}=)([^{separator}]+)(?={separator})'
+        message = re.sub(regex, redaction, message)
 
     return message
