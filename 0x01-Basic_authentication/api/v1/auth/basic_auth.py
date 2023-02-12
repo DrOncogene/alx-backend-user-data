@@ -34,14 +34,13 @@ class BasicAuth(Auth):
         except binascii.Error:
             return None
 
-
     def extract_user_credentials(self, auth_header: str) -> (str, str):
         """
         return the decoded credentials
         """
         if auth_header is None or not isinstance(auth_header, str):
             return None
-        if not ':' in auth_header:
+        if ':' not in auth_header:
             return None
 
         username, password = auth_header.split(':')
