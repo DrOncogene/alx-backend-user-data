@@ -25,4 +25,5 @@ def filter_datum(fields: List[str], redaction: str,
         # and preceded by 'field=' and followed by 'sep'
         regex: str = f'(?<={field}=)([^{separator}]+)(?={separator})'
         message: str = re.sub(regex, redaction, message)
+
     return message
