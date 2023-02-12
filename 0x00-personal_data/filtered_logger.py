@@ -85,7 +85,10 @@ class RedactingFormatter(logging.Formatter):
 
 
 def main():
-    """main"""
+    """
+    creates a logger, connects to
+    the database and logs the result
+    """
     logger = get_logger()
 
     db = get_db()
