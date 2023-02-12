@@ -7,7 +7,7 @@ from typing import List
 
 
 def filter_datum(fields: List[str], redaction: str,
-                 message: str, sep: str) -> str:
+                 message: str, separator: str) -> str:
     """
     uses regex to identify and
     redact specified fields from message
@@ -15,7 +15,7 @@ def filter_datum(fields: List[str], redaction: str,
     :param redaction: string to replace the redacted
                         field's value with
     :param message: str that contain the fields and values
-    :param sep: separator char the delineate field-value pairs
+    :param separator: separator char the delineate field-value pairs
                 in message
 
     :return: message with fields in fields param redacted
@@ -23,6 +23,6 @@ def filter_datum(fields: List[str], redaction: str,
     for field in fields:
         # matches one or more char that is not the 'sep'
         # and preceded by 'field=' and followed by 'sep'
-        regex: str = f'(?<={field}=)([^{sep}]+)(?={sep})'
+        regex: str = f'(?<={field}=)([^{separator}]+)(?={separator})'
         message: str = re.sub(regex, redaction, message)
     return message
