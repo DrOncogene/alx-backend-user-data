@@ -30,3 +30,9 @@ def stats() -> str:
 def not_autorized():
     """dummy unauthorized route"""
     abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def not_autorized():
+    """dummy forbidden route"""
+    abort(403)
