@@ -39,9 +39,9 @@ class BasicAuth(Auth):
         return the decoded credentials
         """
         if auth_header is None or not isinstance(auth_header, str):
-            return None
+            return None, None
         if ':' not in auth_header:
-            return None
+            return None, None
 
         username, password = auth_header.split(':')
         return username, password
