@@ -46,7 +46,10 @@ class BasicAuth(Auth):
         if ':' not in auth_header:
             return None, None
 
-        username, password = auth_header.split(':')
+        delim_idx = auth_header.index(':')
+        username = auth_header[:delim_idx]
+        password = auth_header[delim_idx + 1:]
+
         return username, password
 
     def user_object_from_credentials(self, user_email: str,
@@ -73,12 +76,13 @@ class BasicAuth(Auth):
 
     def current_user(self, request=None) -> TypeVar('User'):
         """fetches the current user"""
-        print('header')
         if not request:
             return None
+
         header = self.authorization_header(request)
         if header is None:
             return None
+
         header = self.extract_base64_authorization_header(header)
         if header is None:
             return None
