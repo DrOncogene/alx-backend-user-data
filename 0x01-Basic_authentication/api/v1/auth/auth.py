@@ -3,6 +3,7 @@
 the auth module
 """
 from typing import List, TypeVar
+import re
 import requests
 
 
@@ -22,10 +23,13 @@ class Auth:
         else:
             path_2 = path[:-2]
 
-        if path not in excluded_paths and path_2 not in excluded_paths:
-            return True
+        exists = False
+        for item in excluded_paths:
+            exists = re.match(item, path) or re.match(item, path_2)
+            if exists:
+                return False
 
-        return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
