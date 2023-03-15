@@ -30,7 +30,7 @@ class SessionAuth(Auth):
             return None
 
         return self.user_id_by_session_id.get(sid, None)
-    
+
     def current_user(self, request=None) -> TypeVar('User'):
         if request is None:
             return None
