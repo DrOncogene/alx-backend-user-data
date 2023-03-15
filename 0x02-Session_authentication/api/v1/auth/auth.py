@@ -2,9 +2,10 @@
 """
 the auth module
 """
+from os import getenv
+
 from typing import List, TypeVar
 import re
-import requests
 
 
 class Auth:
@@ -45,3 +46,11 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """fetches the current user"""
         return None
+    
+    def session_cookie(self, request=None):
+        """gets the cookies"""
+        if request is None:
+            return None
+
+        SESSION_NAME = getenv('SESSION_NAME') or '_my_session_id'
+        return request.cookies.get(SESSION_NAME, None)
