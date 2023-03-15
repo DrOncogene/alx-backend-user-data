@@ -32,7 +32,7 @@ def session_auth():
     sid = auth.create_session(user[0].id)
     session_name = getenv('SESSION_NAME', None)
 
-    response = jsonify(user.to_json())
+    response = jsonify(user[0].to_json())
     response.set_cookie(session_name, sid)
 
     return response
