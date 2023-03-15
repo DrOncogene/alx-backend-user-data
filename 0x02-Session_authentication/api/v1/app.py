@@ -38,7 +38,7 @@ def preprocess_request():
                       '/api/v1/forbidden/', '/api/v1/auth_session/login/']
     if not auth.require_auth(request.path, excluded_paths):
         return
-    
+
     auth_header = auth.authorization_header(request)
     session_cookie = auth.session_cookie(request)
     if not auth_header and not session_cookie:
