@@ -5,14 +5,14 @@ session auth view
 from os import getenv
 
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import abort, jsonify, request
 
 from models.user import User
 
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-def session_auth():
+def session_login():
     """handles login with session id"""
     email = request.form.get('email', None)
     password = request.form.get('password', None)
@@ -36,3 +36,16 @@ def session_auth():
     response.set_cookie(session_name, sid)
 
     return response
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def session_logout():
+    """deletes a session"""
+    from api.v1.auth import auth
+
+    deleted = auth.destroy_session(request)
+    if not deleted:
+        abort(404)
+
+    return jsonify({}), 200

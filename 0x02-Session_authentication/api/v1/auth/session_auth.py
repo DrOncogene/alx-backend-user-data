@@ -2,6 +2,7 @@
 """
 session auth
 """
+from os import getenv
 from typing import TypeVar
 from uuid import uuid4
 
@@ -39,3 +40,17 @@ class SessionAuth(Auth):
         user_id = self.user_id_by_session_id.get(sid, None)
 
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        """deletes a session"""
+        if request is None:
+            return False
+
+        sid = self.session_cookie(request)
+        if sid is None:
+            return False
+        if self.user_id_for_session_id(sid) is None:
+            return False
+
+        del self.user_id_by_session_id[sid]
+        return True
