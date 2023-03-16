@@ -42,7 +42,7 @@ def session_login():
                  strict_slashes=False)
 def session_logout():
     """deletes a session"""
-    from api.v1.auth import auth
+    from api.v1.app import auth
 
     deleted = auth.destroy_session(request)
     if not deleted:
