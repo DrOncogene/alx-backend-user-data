@@ -44,5 +44,4 @@ class SessionExpAuth(SessionAuth):
         if datetime.now().timestamp() > created + self.session_duration:
             return None
 
-
         return session_dict['user_id']
