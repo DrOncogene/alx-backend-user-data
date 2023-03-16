@@ -4,9 +4,7 @@ session login with expiration
 """
 from os import getenv
 from datetime import datetime
-from typing import TypeVar
 
-from models.user import User
 from .session_auth import SessionAuth
 
 
@@ -36,7 +34,6 @@ class SessionExpAuth(SessionAuth):
             return None
 
         session_dict = self.user_id_by_session_id[sid]
-        print(session_dict)
         if not session_dict.get('created_at', None):
             return None
 
