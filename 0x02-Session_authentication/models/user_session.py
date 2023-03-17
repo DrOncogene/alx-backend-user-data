@@ -2,8 +2,8 @@
 """
 model for user session
 """
-
 from .base import Base
+
 
 class UserSession(Base):
     """user session class"""

@@ -8,6 +8,8 @@ from uuid import uuid4
 from models.user_session import UserSession
 from .session_exp_auth import SessionExpAuth
 
+UserSession.load_from_file()
+
 
 class SessionDBAuth(SessionExpAuth):
     """session login with db"""
@@ -34,7 +36,7 @@ class SessionDBAuth(SessionExpAuth):
         sess = UserSession.search({'session_id': sid})
         if len(sess) == 0:
             return None
-        
+
         session_dict = self.user_id_by_session_id[sid]
         if not session_dict.get('created_at', None):
             return None
