@@ -21,10 +21,6 @@ class SessionDBAuth(SessionExpAuth):
         sid = str(uuid4())
         new_session = UserSession(user_id=user_id, session_id=sid)
         new_session.save()
-        self.user_id_by_session_id[sid] = {
-            'session': new_session,
-            'created_at': datetime.now()
-        }
 
         return new_session.session_id
 
@@ -37,18 +33,15 @@ class SessionDBAuth(SessionExpAuth):
         if len(sess) == 0:
             return None
 
-        session_dict = self.user_id_by_session_id[sid]
-        if not session_dict.get('created_at', None):
-            return None
-
+        session_obj = sess[0]
         if self.session_duration <= 0:
-            return session_dict.get('user_id', None)
+            return session_obj.user_id
 
-        created = session_dict['created_at'].timestamp()
+        created = session_obj.created_at.timestamp()
         if datetime.now().timestamp() > created + self.session_duration:
             return None
 
-        return sess[0].user_id
+        return session_obj.user_id
 
     def destroy_session(self, request=None):
         """deletes a session"""
