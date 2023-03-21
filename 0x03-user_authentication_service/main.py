@@ -80,7 +80,7 @@ def log_out(session_id: str) -> None:
 
 def reset_password_token(email: str) -> str:
     """fetch reset token"""
-    resp = requests.get(f'{URL}/reset_password', data={'email': email})
+    resp = requests.post(f'{URL}/reset_password', data={'email': email})
     assert resp.status_code == 200
 
     res_json = resp.json()
