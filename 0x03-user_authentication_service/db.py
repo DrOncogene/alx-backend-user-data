@@ -44,7 +44,9 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """filter users by kw"""
+        """
+        filter users by kwargs
+        """
         props = ['id', 'email', 'hashed_password',
                  'session_id', 'reset_token']
         for key in kwargs:
@@ -52,7 +54,22 @@ class DB:
                 raise InvalidRequestError
 
         user = self._session.query(User).filter_by(**kwargs).first()
-        if not user:
+        if user is None:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        finds users by user_id and updates
+        them with kwargs
+        """
+        user = self.find_user_by(id=user_id)
+
+        props = ['id', 'email', 'hashed_password',
+                 'session_id', 'reset_token']
+        for key in kwargs:
+            if key not in props:
+                raise ValueError
+
+        user.__dict__.update(kwargs)
