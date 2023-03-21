@@ -59,7 +59,7 @@ def logout():
     return redirect('/')
 
 
-@app.route('/profile', method=['GET'], strict_slashes=False)
+@app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile():
     """return a user email for a given session id"""
     sid = request.cookies.get('session_id')
