@@ -73,3 +73,4 @@ class DB:
                 raise ValueError
 
         user.__dict__.update(kwargs)
+        self._session.commit()
