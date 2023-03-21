@@ -43,7 +43,7 @@ class DB:
 
         return new_user
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """filter users by kw"""
         props = ['id', 'email', 'hashed_password',
                  'session_id', 'reset_token']
