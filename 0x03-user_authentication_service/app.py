@@ -13,11 +13,15 @@ AUTH = Auth()
 
 @app.route('/', methods=['GET'])
 def index():
+    """home route"""
     return jsonify({'message': 'Bienvenue'})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
+    """
+    registers a new user
+    """
     email = request.form.get('email')
     passwd = request.form.get('password')
     if not email or not passwd:
