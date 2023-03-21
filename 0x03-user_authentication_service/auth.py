@@ -2,6 +2,7 @@
 """
 auth module
 """
+from uuid import uuid4
 from sqlalchemy.orm.exc import NoResultFound
 from bcrypt import hashpw, gensalt, checkpw
 
@@ -17,6 +18,13 @@ def _hash_password(password: str) -> bytes:
     hashed = hashpw(password.encode('utf-8'), salt)
 
     return hashed
+
+
+def _generate_uuid():
+    """
+    generates random uuids
+    """
+    return str(uuid4())
 
 
 class Auth:
