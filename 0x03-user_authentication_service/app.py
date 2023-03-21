@@ -63,6 +63,9 @@ def logout():
 def profile():
     """return a user email for a given session id"""
     sid = request.cookies.get('session_id')
+    if sid is None:
+        abort(403)
+
     user = AUTH.get_user_from_session_id(sid)
     if user is None:
         abort(403)
