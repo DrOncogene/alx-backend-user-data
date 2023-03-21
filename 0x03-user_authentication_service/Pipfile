@@ -8,6 +8,7 @@ sqlalchemy = "*"
 pycodestyle = "*"
 bcrypt = "*"
 flask = "*"
+requests = "*"
 
 [dev-packages]
 
