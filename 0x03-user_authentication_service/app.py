@@ -22,6 +22,7 @@ def create_user():
     passwd = request.form.get('password')
     if not email or not passwd:
         return jsonify({'message': 'missing email or password'}), 400
+
     try:
         user = AUTH.register_user(email=email, password=passwd)
         payload = {'email': email, 'message': 'user created'}
