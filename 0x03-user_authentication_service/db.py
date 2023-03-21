@@ -68,9 +68,9 @@ class DB:
 
         props = ['id', 'email', 'hashed_password',
                  'session_id', 'reset_token']
-        for key in kwargs:
+        for key, val in kwargs.items():
             if key not in props:
                 raise ValueError
+            setattr(user, key, val)
 
-        user.__dict__.update(kwargs)
         self._session.commit()
