@@ -20,9 +20,8 @@ class Auth:
 
         if path[-1] != '/':
             path_2 = path + '/'
-        else:
+        if path[-2] == '*':
             path_2 = path[:-2]
-
         exists = False
         for item in excluded_paths:
             exists = re.match(item, path) or re.match(item, path_2)
